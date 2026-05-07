@@ -6,14 +6,12 @@ class BST{
     BST(); // constructor
     ~BST();
 
-    int size(); // number of nodes
-    int height(); // height of the tree. 
+    int size(); // number of nodes 
 
     void insert(string word);
     bool search(string word);
     void print();
     void completions(string pref);
-
 
     
 
@@ -26,6 +24,11 @@ class BST{
     };
 
     Node* root;
-    
+    void deleteNodes(Node* p);
+    int computeSize(Node* p);
+    bool searchN(Node*p, string value);
+    void printN(Node*p);
+    void completionN(Node* p, string pref);
+    void insertN(Node*p , string value);
 };
 
