@@ -1,14 +1,14 @@
 #include "binarysearch.h"
 
-BST::BST(){
+BST::BST(){ // O(1)
     root = nullptr;
 }
 
-BST::~BST(){
+BST::~BST(){ // O(n)
     deleteNodes(root);
 }
 
-void BST::deleteNodes(Node* p){
+void BST::deleteNodes(Node* p){ // O(n)
     if (p == nullptr)
         return;
     deleteNodes(p->left);
@@ -16,22 +16,22 @@ void BST::deleteNodes(Node* p){
     delete p;
 }
 
-int BST::size(){
+int BST::size(){ // O(n)
     return computeSize(root);
 }
 
-int BST::computeSize(Node* p){
+int BST::computeSize(Node* p){ // O(n)
     if (p == nullptr)
         return 0;
 
     return 1 + computeSize(p -> left) + computeSize(p -> right);
 }
 
-void BST::insert(string word){
-    insertN(root, value);
+void BST::insert(string word){ // O(logn)
+    insertN(root, word);
 }
 
-void BST::insertN(Node* p, string value){
+void BST::insertN(Node* &p, string &value){ // in an unbalanced tree, O(n); in a perfect BST, O(logn)
     if (p == nullptr){
         Node* n = new Node();
         n -> data = value;
@@ -46,10 +46,10 @@ void BST::insertN(Node* p, string value){
 }
 
 bool BST::search(string word){
-    return searchN(root, value)
+    return searchN(root, word);
 }
 
-bool BST::searchN(Node* p, string value){
+bool BST::searchN(Node* p, string &value){ //in an unbalanced tree, O(n); in a perfect BST, O(logn)
     if (p == nullptr)
         return false;
     else if (p -> data == value)
@@ -64,35 +64,34 @@ void BST::print(){
     printN(root);
 }
 
-void BST::print(Node* p){ //using in-order traversal
+void BST::printN(Node* &p){ //using in-order traversal
     if (p == nullptr)
         return;
-    print(p->left);
-    cout << p-> data << " ";
-    print(p->right)
-
+    printN(p->left);
+    cout << p->data << ", " ;
+    printN(p->right);
 }
 
-void BST::completions(string perf){
+void BST::completions(string pref){
     completionN(root, pref);
 }
 
-void BST::completionN(Node* p, string pref){
+void BST::completionN(Node* &p, string pref){
     if (p == nullptr) //base case
         return;
     
-    int comp = n->data.compare(0, pref.length(), pref); // this compares the first 2 letters of the strings and compares them 
+    int comp = p->data.compare(0, pref.length(), pref); // this compares the first 2 letters of the strings and compares them 
     
     if(comp == 0){
-        cout << n-> data<< endl; // if there are no comparisions then its equal and we print
+        cout << p-> data<< endl; // if there are no comparisions then its equal and we print
 
-        completionN(n->left, pref); // we still check left and right for matches of the same first 2 letters
-        completionN(n->right, pref);
+        completionN(p->left, pref); // we still check left and right for matches of the same first 2 letters
+        completionN(p->right, pref);
     }
     else if(comp < 0){ // if the nodes pref is smaller than the comparision pref then we check right for the match
-        completionN(n->right, pref);
+        completionN(p->right, pref);
     }
     else{ // if nodes pref is bigger then comparison pref then we check left
-        completionN(n->left, pref);
+        completionN(p->left, pref);
     }
 }

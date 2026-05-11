@@ -1,11 +1,11 @@
 #include "unsortedlinkedlist.h"
 
-UnsortedList::UnsortedList(){
+UnsortedList::UnsortedList(){ // O(2)
     head = nullptr; // creates empty list of nullptr
     tail = nullptr;
 }
 
-UnsortedList::~UnsortedList(){
+UnsortedList::~UnsortedList(){ // O(n)
     for (Node* i = head; i != nullptr;){ // loops through list from head to tail 
         Node* temp = i->next; // creates a node that holds the address of i-> next
         delete i; // deletes current i data
@@ -13,7 +13,7 @@ UnsortedList::~UnsortedList(){
     }
 }
 
-void UnsortedList::print(){
+void UnsortedList::print(){ //O(n)
     for (Node* i = head; i != nullptr; i = i-> next){ // loops through list head to tail 
         // i->data->print();
         cout << i-> data << endl; // prints current i's data
@@ -21,7 +21,7 @@ void UnsortedList::print(){
     }
 }
 
-void UnsortedList::pushFront(int value){
+void UnsortedList::pushFront(int value){ // O(6)
     Node* n = new Node(); // create new node space for value
     n->data = value; // makes new node data equal to value being inserted
     n -> next = head; // makes new nodes next equal to current head to establish new head
@@ -31,7 +31,7 @@ void UnsortedList::pushFront(int value){
     }
 }
 
-int UnsortedList::popMin(){
+int UnsortedList::popMin(){ // O(n)
     if (head == nullptr) 
         return 0; // returns 0 in case the list is empty
     int index = minIndex(); // finds the "index" of the node that holds the minimum value
@@ -57,7 +57,7 @@ int UnsortedList::popMin(){
     return temp; // returns the value from the deleted node
 }
 
-int UnsortedList::minIndex(){
+int UnsortedList::minIndex(){ // O(n)
     if (head == nullptr) // returns -1 in the case that the list is empty
         return -1;
     Node* current = head; // creates a pointer variable 'current' that holds the address of head
@@ -74,7 +74,7 @@ int UnsortedList::minIndex(){
     return minIndex; // returns the index of the minimum value
 }
 
-int UnsortedList::size(){
+int UnsortedList::size(){ O(n)
     int count = 0; // initiates count to 0
     for (Node* i = head; i != nullptr; i = i -> next){
         count++; // increases count by 1 each time the loop runs
